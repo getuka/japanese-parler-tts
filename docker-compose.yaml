@@ -8,9 +8,10 @@ services:
       dockerfile: Dockerfile
     image: japanese-parler-tts-server
     container_name: japanese-parler-tts-server
-    command: uvicorn server.main:app --host 0.0.0.0 --port 8000 --reload
+    command: ["/bin/sh", "-c", "uvicorn server.main:app --host 0.0.0.0 --port 8000 --reload"]
     volumes:
       - .cache:/root/.cache/huggingface
+      - ./:/app
     ports:
       - 8000:8000
     deploy:

@@ -48,9 +48,9 @@ class Config:
             config_data = yaml.safe_load(file)
 
         # 設定を反映
-        cls.MODEL_NAME = config_data.get('MODEL_NAME', cls.MODEL_NAME)
-        cls.TORCH_DTYPE = getattr(torch, config_data.get('TORCH_DTYPE', 'float32'))
-        cls.VALID_API_KEYS = config_data.get('VALID_API_KEYS', cls.VALID_API_KEYS)
+        cls.MODEL_NAME = config_data.get('model_name', cls.MODEL_NAME)
+        cls.TORCH_DTYPE = getattr(torch, config_data.get('torch_dtype', 'float16'))
+        cls.VALID_API_KEYS = config_data.get('api_keys', cls.VALID_API_KEYS)
 
 # 音声生成リクエスト
 class AudioRequest(BaseModel):
@@ -69,6 +69,10 @@ CONFIG_FILE_PATH = "config.yaml"
 
 # 設定をロード
 Config.load_from_yaml(CONFIG_FILE_PATH)
+print(Config.MODEL_NAME,
+      Config.TORCH_DTYPE,
+      Config.ATTN_IMPLEMENTATION,
+      Config.COMPILE_MODE,)
 
 # TTS モジュールの初期化
 tts = TTS(
