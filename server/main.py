@@ -167,7 +167,8 @@ async def generate_speech(audio_request: AudioRequest, authorization: Optional[s
         )
 
         # 音声ファイルに書き込み
-        sf.write(Config.OUTPUT_FILE, audio, sampling_rate)
+        # 音声ファイルに書き込み
+        sf.write(Config.OUTPUT_FILE, audio, sampling_rate, format=audio_request.response_format)
 
         # 音声ファイルをレスポンスとして返す
         return FileResponse(
