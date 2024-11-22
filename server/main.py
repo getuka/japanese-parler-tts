@@ -1,4 +1,4 @@
-from fastapi import Header, FastAPI, HTTPException, Response
+from fastapi import Header, FastAPI, HTTPException, Response, Query
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from enum import Enum
@@ -36,7 +36,7 @@ class Config:
 
 # 音声生成リクエスト
 class AudioRequest(BaseModel):
-    input: str
+    input: str = Query(None)
     model: str = Config.MODEL_NAME
     voice: str = Config.DESCRIPTION_PROMPT
     response_format: Config.ResponseFormat = Config.ResponseFormat.WAV
@@ -118,11 +118,6 @@ async def generate_speech(audio_request: AudioRequest, authorization: Optional[s
 
     Args:
         audio_request (AudioRequest): 音声リクエストの内容
-            - input: 読み上げる文章
-            - voice: 読み上げるプロンプト
-            - model: 使用するTTSモデル名
-            - response_format: 出力形式（デフォルト: wav）
-            - speed: 再生速度
         authorization (Optional[str]): 認証情報 (Bearer トークン)
 
     Returns:
