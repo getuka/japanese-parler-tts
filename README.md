@@ -97,6 +97,24 @@ Japanese Parler-TTS用のOpenAI互換APIサーバーを構築するリポジト�
 
    リクエストが成功すると、指定した音声フォーマットでレスポンスを返します。
 
+
+## サーバー設定の変更
+
+`config.yaml`ファイルの内容を変更することで、サーバーの設定を調整することができます。
+
+### サンプル `config.yaml` の内容
+
+```yaml
+model_name: "2121-8/japanese-parler-tts-mini-bate"
+torch_dtype: "bfloat16"
+api_keys: None
+```
+
+- **`model_name`**: 使用するTTSモデルの名前を指定します。
+- **`torch_dtype`**: PyTorchのデータ型を指定します（例: `bfloat16`、`float32`）。
+- **`api_keys`**: APIキーを必要とする場合に設定します。不要であれば`None`のままにしてください。
+
+
 ## 注意事項
 
 - このプロジェクトは、Parler-TTSモデルを日本語で利用するための実験的な実装です。
