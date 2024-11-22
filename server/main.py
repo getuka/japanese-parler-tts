@@ -4,7 +4,7 @@ from pydantic import BaseModel
 from enum import Enum
 import soundfile as sf
 import torch
-from tts import TTS
+from server.tts import TTS
 from typing import Optional
 from openai.types import Model
 
