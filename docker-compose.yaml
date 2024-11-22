@@ -1,4 +1,4 @@
-version: "3.0"
+version: "3.8"
 
 services:
   # vllmのコンテナ
@@ -9,6 +9,10 @@ services:
     image: japanese-parler-tts-server
     container_name: japanese-parler-tts-server
     command: uvicorn server.main:app --host 0.0.0.0 --port 8000 --reload
+    volumes:
+      - .cache:/root/.cache/huggingface
+    ports:
+      - 8000:8000
     deploy:
       resources:
         reservations:
