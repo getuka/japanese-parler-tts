@@ -1,0 +1,18 @@
+version: "3.0"
+
+services:
+  # vllmのコンテナ
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: japanese-parler-tts-server
+    container_name: japanese-parler-tts-server
+    command: uvicorn
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]

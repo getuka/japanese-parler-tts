@@ -1,0 +1,7 @@
+flash-attn
+openai
+pydantic
+fastapi
+uvicorn
+git+https://github.com/huggingface/parler-tts.git
+git+https://github.com/getuka/RubyInserter.git
