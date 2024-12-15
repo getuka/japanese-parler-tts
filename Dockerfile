@@ -1,20 +1,26 @@
 FROM nvidia/cuda:12.1.1-cudnn8-devel-ubuntu22.04
 
-# 使うソフトウェアのインストール
-RUN apt-get update
-RUN apt-get install -y python3 python3-pip
-RUN apt-get install -y git curl
+# Install system dependencies
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        python3 python3-pip \
+        git \
+        curl && \
+    rm -rf /var/lib/apt/lists/*
 
-# ライブラリのインストール
-RUN pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
-RUN pip install packaging ninja
-RUN MAX_JOBS=4 pip install flash-attn --no-build-isolation
-RUN pip install git+https://github.com/huggingface/parler-tts.git
-RUN pip install git+https://github.com/getuka/RubyInserter.git
-RUN pip install fastapi
-RUN pip install pydantic
-RUN pip install openai
-RUN pip install uvicorn
+# Install Python libraries
+RUN pip3 install --no-cache-dir \
+    torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121 && \
+    pip3 install --no-cache-dir \
+        packaging \
+        ninja \
+        flash-attn --no-build-isolation \
+        git+https://github.com/huggingface/parler-tts.git \
+        git+https://github.com/getuka/RubyInserter.git \
+        fastapi \
+        pydantic \
+        openai \
+        uvicorn
 
-RUN mkdir /app
+# Create and set the working directory
 WORKDIR /app
